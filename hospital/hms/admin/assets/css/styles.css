@@ -705,9 +705,9 @@ h5.over-title {
   }
 }
 .navbar .navbar-right > li.current-user > a {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  font-size: 13px;
+  padding-top:8px;
+  padding-bottom: 8px;
+  font-size: 12px;
   font-weight: normal;
   text-transform: none;
   float: left;

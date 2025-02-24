@@ -1,0 +1,15 @@
+/vendor/
+.env
+*.log
+/tmp/
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+.vscode/
+.idea/
+node_modules/
+package-lock.json
+yarn.lock
+*.sql
+*.DS_Store
+Thumbs.db

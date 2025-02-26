@@ -37,7 +37,7 @@ jobs:
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
-        mysql -h"${{ secrets.MYSQL_HOST }}" -u"${{ secrets.MYSQL_USER }}" -p"${{ secrets.MYSQL_PASSWORD }}" -e "CREATE DATABASE IF NOT EXISTS my_database;"
+        mysql -h"${{ secrets.MYSQL_HOST }}" -u"${{ secrets.MYSQL_USER }}" -p"${{ secrets.MYSQL_PASSWORD }}" -e "CREATE DATABASE IF NOT EXISTS hms_db;"
     
     # Deploy to Vercel and setup database
     - name: Deploy to Vercel with Snaplet

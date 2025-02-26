@@ -1,4 +1,4 @@
-name: PHP Composer
+name: hms
 
 on:
   push:
@@ -32,10 +32,21 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v4.1.9
+    # Deploy MySQL database on Vercel
+    - name: Setup MySQL on Vercel
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      run: |
+        mysql -h"${{ secrets.MYSQL_HOST }}" -u"${{ secrets.MYSQL_USER }}" -p"${{ secrets.MYSQL_PASSWORD }}" -e "CREATE DATABASE IF NOT EXISTS my_database;"
+    
+    # Deploy to Vercel and setup database
+    - name: Deploy to Vercel with Snaplet
+      uses: snaplet/vercel-preview-database-action@v1.0.1
       with:
-       name: "hms"
+        vercel-env: DATABASE_URL
+        database-create-command: snaplet preview-database create --git --latest
+        database-url-command: snaplet preview-database url --git
+        database-reset: true  # Reset database on each commit
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
